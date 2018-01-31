@@ -6,13 +6,28 @@
     </div>
 
     <keep-alive>
-      <router-view></router-view>
+      <router-view v-if="!$route.meta.noKeepAlive">
+        <!-- 这里是会被缓存的视图组件 -->
+      </router-view>
     </keep-alive>
+
+    <router-view v-if="$route.meta.noKeepAlive">
+      <!-- 这里是不被缓存的视图组件 -->
+    </router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
+    created() {
+
+    },
+    data () {
+      return {
+//        试了半天，发现有路由界面时在beforeEach全局中还是不好配置，只能这样处理了
+        needDestory: false
+      }
+    },
     methods: {
       intent(index) {
         if (index === 1) {
@@ -23,6 +38,17 @@
       },
       back() {
         this.$router.go(-1)
+      }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (to.path === '/C_03') {
+        this.needDestory = true
+      }
+      next()
+    },
+    deactivated() {
+      if (this.needDestory) {
+        this.$destroy()
       }
     }
   }

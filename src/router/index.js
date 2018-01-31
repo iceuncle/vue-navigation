@@ -63,12 +63,13 @@ router.beforeEach((to, from, next) => {
   const toDepth = to.path.substring(to.path.length - 2, to.path.length)
   const fromDepth = from.path.substring(from.path.length - 2, from.path.length)
   if (from.path !== '/' && toDepth < fromDepth) {
-      // 有tab界面时需要添加次判断  需要将/D_04路由的noKeepAlive置为true，而不是/Dtab1_04路由或/Dtab2_04路由
+    // 有tab界面时需要添加此判断 from的KeepAlive不需要置为false
     if (from.path === '/Dtab1_04' || from.path === '/Dtab2_04') {
-      from.matched[0].meta.noKeepAlive = true
-    } else {
-      from.meta.noKeepAlive = true
+      to.meta.noKeepAlive = false
+      next()
+      return
     }
+    from.meta.noKeepAlive = true
     to.meta.noKeepAlive = false
   }
   next()
