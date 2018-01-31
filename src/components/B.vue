@@ -3,6 +3,7 @@
     <button @click="back">返回</button>
     <h1>界面B</h1>
     <button @click="intent">跳转C</button>
+    <input v-model="data">
   </div>
 </template>
 
@@ -10,6 +11,11 @@
   export default {
     created() {
       this._loadDatas()
+    },
+    data() {
+      return {
+        data: ''
+      }
     },
     methods: {
       _loadDatas() {
