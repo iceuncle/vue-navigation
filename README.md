@@ -1,21 +1,9 @@
 # vue-navigation
 
-> A Vue.js project
+> vue前进刷新、后退不刷新的效果。即加载过的界面能缓存起来（返回不用重新加载），关闭的界面能被销毁掉（再进入时重新加载）。例如对a前进到b，b刷新，b后退到a，a不刷新。
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+详细说明见掘金[vue实现前进刷新，后退不刷新](https://juejin.im/post/5a69894a518825733b0f12f2)
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+兼容移动端`tab`界面切换，详细配置见demo。
